@@ -36,8 +36,9 @@ $(function(){
     }
   })
   
-  $.recordEvents({ duration: 15000, finished : function(){
-    $.playbackEvents(this, { interval : 20, finished : function() {
+  $.recordEvents({ duration: 8000, finished : function(){
+    $.playbackEvents(this, { interval : 15, finished : function() {
     }})
   }})
+  
 })
