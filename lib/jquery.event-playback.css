@@ -1,0 +1,8 @@
+#event-playback-cursor {
+  display: none;
+  position: absolute;
+  z-index: 90;
+  width: 22px;
+  height: 22px;
+  background: url(images/arrow.png) 0 0 no-repeat;  
+}
