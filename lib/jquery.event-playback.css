@@ -8,9 +8,15 @@
 }
 #event-playback-cursor .disc {
   display: none;
-  margin: 0;
+  margin: -22px 0 0 -22px;
   padding: 0;
   width: 44px;
   height: 44px;
-  background: red;
+  background: url(images/disc.png) 0 0 no-repeat;
+}
+#event-playback-cursor .disc.blue {
+  background-position: -44px 0;
+}
+#event-playback-cursor .disc.red {
+  background-position: -88px 0;
 }
