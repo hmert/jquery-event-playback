@@ -1,6 +1,6 @@
 
 $(function(){
-  $.recordEvents({ duration: 4000, finished : function(){
+  $.recordEvents({ duration: 6000, finished : function(){
     console.log('finished recording');
     $.playbackEvents(this, { interval : 20, finished : function() {
       console.log('finished playback');
