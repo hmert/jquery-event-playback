@@ -1,8 +1,8 @@
 
 $(function(){
-  $.recordEvents({ duration: 2000, finished : function(){
+  $.recordEvents({ duration: 10000, finished : function(){
     console.log('finished recording');
-    $.playbackEvents(this, { finished : function() {
+    $.playbackEvents(this, { interval : 20, finished : function() {
       console.log('finished playback');
     }})
   }})
