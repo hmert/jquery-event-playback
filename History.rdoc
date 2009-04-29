@@ -1,4 +1,13 @@
 
+=== 0.0.2 / 2009-04-29
+
+* Added trigger and triggerLast utils
+* Added mouseout simulation
+* Added delay option
+* Added encodeJSON(), removed dependency for toSource()
+* Renamed export() to exportJSON() which was causing issue with Safari
+* Fixed XPath issues
+
 === 0.0.1 / 2009-04-28
 
 * Initial release
