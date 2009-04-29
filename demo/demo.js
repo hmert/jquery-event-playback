@@ -3,6 +3,11 @@ $(function(){
   $('input[type=button]').click(function() {
     $(this).attr('value', $(this).attr('value') + '.')
   })
+  .hover(function(){
+    $(this).css('font-weight', 'bold')
+  }, function(){
+    $(this).css('font-weight', 'normal')
+  })
   
   log = function(message) {
     $('#log').val($('#log').val() + "\n" + message)
