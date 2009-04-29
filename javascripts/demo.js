@@ -13,7 +13,7 @@ $(function(){
   log = function(message) {
     $('#log').val($('#log').val() + "\n" + message)
   }
-  
+
   $('#replay').click(function() {
     log('Started playback')
     session = eval($('#export').val())
