@@ -1,7 +1,7 @@
 
 $(function(){
-  $('input[type=button]').click(function() {
-    $(this).attr('value', $(this).attr('value') + '.')
+  $('input[value=Button]').click(function() {
+    $(this).attr('value', 'Pressed')
   })
   
   .hover(function(){
