@@ -28,7 +28,7 @@ $(function(){
     duration = parseInt($('#seconds').val()) * 1000
     log('Started recording: ' + duration + 'ms')
     $.recordEvents({ duration: duration, finished : function(){
-      $('#export').val(this.export())
+      $('#export').val(this.exportJSON())
       log('Finished recording')
     }})
   })
