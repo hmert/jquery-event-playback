@@ -1,5 +1,8 @@
 
 $(function(){
+  
+  //$.playbackEvents($.getJSON('sessions/demo.json'), { interval : 20 })
+  
   $('input[value=Button]').click(function() {
     $(this).attr('value', 'Pressed')
   })
