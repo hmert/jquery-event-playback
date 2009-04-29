@@ -15,10 +15,10 @@ $(function(){
   }
   
   $('#replay').click(function() {
-    log('Playing back export')
+    log('Started playback')
     session = eval($('#export').val())
     $.playbackEvents(session, { interval : 25, finished : function(){
-      log('Playback of export finished')
+      log('Playback finished')
     }})
   })
   
