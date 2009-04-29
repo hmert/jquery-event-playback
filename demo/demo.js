@@ -3,6 +3,7 @@ $(function(){
   $('input[type=button]').click(function() {
     $(this).attr('value', $(this).attr('value') + '.')
   })
+  
   .hover(function(){
     $(this).css('font-weight', 'bold')
   }, function(){
@@ -13,6 +14,14 @@ $(function(){
     $('#log').val($('#log').val() + "\n" + message)
   }
   
+  $('#replay').click(function() {
+    log('Playing back export')
+    session = eval($('#export').val())
+    $.playbackEvents(session, { interval : 25, finished : function(){
+      log('Playback of export finished')
+    }})
+  })
+  
   $('#start').click(function(){
     $('#log').val('')
     $('#export').val('')
@@ -21,9 +30,6 @@ $(function(){
     $.recordEvents({ duration: duration, finished : function(){
       $('#export').val(this.export())
       log('Finished recording')
-      $.playbackEvents(this, { interval : 25, finished : function() {
-        log('Playback finished')
-      }})
     }})
   })
   
