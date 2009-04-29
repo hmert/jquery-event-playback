@@ -18,7 +18,7 @@ $(function(){
     log('Started playback')
     session = eval($('#export').val())
     $.playbackEvents(session, { interval : 25, finished : function(){
-      log('Playback finished')
+      log('Finished playback')
     }})
   })
   
