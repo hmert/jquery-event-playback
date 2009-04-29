@@ -23,6 +23,19 @@ plays the session back when finished.
     $.playbackEvents(this, { interval : 25 })
   }})
 
+You may also load static sessions using jQuery's getJSON method:
+
+  $.getJSON('sessions/demo.json', function(session){
+    $.playbackEvents(session, { interval : 20 })
+  })
+
+Saving a session might look similar to this:
+
+  $.recordEvents({ duration: 5000, finished : function(){
+    session = this.export()
+    // Do a POST to server to save the session
+  }})  
+
 == License 
 
 (The MIT License)
