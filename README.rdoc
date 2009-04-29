@@ -1,7 +1,27 @@
 
 = EventPlayback
 
-Coming soon
+Record and play back events using jQuery.
+
+== Features
+
+* Record events
+* Play back recorded sessions
+* Playback speed
+* Export / Import JSON sessions
+* Emulates:
+  - mouse movement / speed
+  - hovering
+  - input value changes
+
+== Examples
+
+Below is a simple example which records events for 5 seconds, then automatically
+plays the session back when finished.
+
+  $.recordEvents({ duration: 5000, finished : function(){
+    $.playbackEvents(this, { interval : 25 })
+  }})
 
 == License 
 
