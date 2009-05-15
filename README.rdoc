@@ -5,6 +5,7 @@ Record and play back events using jQuery.
 
 == Features
 
+* No external dependencies (jQuery only)
 * Record events
 * Play back recorded sessions
 * Playback speed
@@ -38,7 +39,7 @@ Saving a session might look similar to this:
 
 == Demo
 
- http://visionmedia.github.com/jquery-event-playback
+http://visionmedia.github.com/jquery-event-playback
 
 == License 
 
