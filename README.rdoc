@@ -20,9 +20,9 @@ Record and play back events using jQuery.
 Below is a simple example which records events for 5 seconds, then automatically
 plays the session back when finished.
 
-  $.recordEvents({ duration: 5000, finished : function(){
+  $.recordEvents({ duration: 5000 }, function(){
     $.playbackEvents(this, { interval : 25 })
-  }})
+  })
 
 You may also load static sessions using jQuery's getJSON method:
 
@@ -32,10 +32,10 @@ You may also load static sessions using jQuery's getJSON method:
 
 Saving a session might look similar to this:
 
-  $.recordEvents({ duration: 5000, finished : function(){
+  $.recordEvents({ duration: 5000 }, function(){
     session = this.export()
     // Do a POST to server to save the session
-  }}) 
+  }) 
 
 == Demo
 
