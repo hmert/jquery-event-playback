@@ -38,7 +38,7 @@ Saving a session might look similar to this:
 
 == Demo
 
-Currently the demo only works in FireFox due to using toSource() for exporting,
+Currently the demo only works in FireFox / Safari due to using toSource() for exporting,
 however the demo can be viewed at http://visionmedia.github.com/jquery-event-playback/
 
 == License 
