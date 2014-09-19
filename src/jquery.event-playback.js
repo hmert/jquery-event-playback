@@ -1,9 +1,9 @@
 
 // EventPlayback - Copyright (c) 2009 TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 
-(function ($) {
+;(function ( $, window, document, undefined ) {
 
-    EventPlayback = {version: '0.0.3'}
+    EventPlayback = {version: "0.0.3"};
 
     /**
      * Record events with _options_.
@@ -26,10 +26,11 @@
      */
 
     $.recordEvents = function (options, callback) {
-        if (callback)
-            options.finished = callback
-        return (new EventRecorder(options)).start()
-    }
+        if (callback) {
+            options.finished = callback;
+        }
+        return (new EventRecorder(options)).start();
+    };
 
     /**
      * Playback events in _session_, with _options_.
@@ -41,10 +42,11 @@
      */
 
     $.playbackEvents = function (session, options, callback) {
-        if (callback)
-            options.finished = callback
-        return (new EventPlayer(session, options)).start()
-    }
+        if (callback) {
+            options.finished = callback;
+        }
+        return (new EventPlayer(session, options)).start();
+    };
 
     /**
      * EventRecorder constructor.
@@ -61,12 +63,12 @@
      */
 
     EventRecorder = function (options) {
-        this.frames = []
+        this.frames = [];
         this.options = $.extend({
             dom: $(document),
             delay: 500
-        }, options || {})
-    }
+        }, options || {});
+    };
 
     // --- EventRecorder
 
@@ -80,25 +82,29 @@
          */
 
         encodeJSON: function (input) {
-            if (!input)
-                return 'null'
-            switch (input.constructor) {
-                case String:
-                    return '"' + input.replace(/"/gm, '\\"') + '"'
-                case Number:
-                    return input.toString()
-                case Array :
-                    var buf = []
-                    for (i in input)
-                        buf.push(this.encodeJSON(input[i]))
-                    return '[' + buf.join(',') + ']'
-                case Object:
-                    var buf = []
-                    for (k in input)
-                        buf.push(k + ':' + this.encodeJSON(input[k]))
-                    return '{' + buf.join(', ') + '}'
-                default:
-                    return 'null'
+            if (!input) {
+                return "null";
+            } else {
+                switch (input.constructor) {
+                    case String:
+                        return "\"" + input.replace(/"/gm, "\\\"") + "\"";
+                    case Number:
+                        return input.toString();
+                    case Array :
+                        var buf = [];
+                        for (var i in input){
+                            buf.push(this.encodeJSON(input[i]));
+                        }
+                        return "[" + buf.join(",") + "]";
+                    case Object:
+                        var buf2 = [];
+                        for (var k in input){
+                            buf2.push(k + ":" + this.encodeJSON(input[k]));
+                        }
+                        return "{" + buf2.join(", ") + "}";
+                    default:
+                        return "null";
+                }
             }
         },
         /**
@@ -109,9 +115,10 @@
          */
 
         exportJSON: function () {
-            if (this.running)
-                throw 'EventRecorder: cannot export while running'
-            return '(' + this.encodeJSON({frames: this.frames}) + ')'
+            if (this.running){
+                throw "EventRecorder: cannot export while running";
+            }
+            return "(" + this.encodeJSON({frames: this.frames}) + ")";
         },
         /**
          * Pack a frame.
@@ -130,8 +137,8 @@
                 y: e.pageY,
                 type: e.type,
                 target: this.getElementXPath(e.target),
-                value: e.type == 'change' ? $(e.target).val() : null
-            }
+                value: e.type === "change" ? $(e.target).val() : null
+            };
         },
         /**
          * Return XPath for _elm_.
@@ -142,21 +149,23 @@
          */
 
         getElementXPath: function (elm) {
-            for (segs = []; elm && elm.nodeType == 1; elm = elm.parentNode) {
-                if (elm.hasAttribute('id')) {
-                    segs.unshift('id("' + elm.getAttribute('id') + '")')
-                    return segs.join('/')
+            for (segs = []; elm && elm.nodeType === 1; elm = elm.parentNode) {
+                if (elm.hasAttribute("id")) {
+                    segs.unshift("id(\"" + elm.getAttribute("id") + "\")");
+                    return segs.join("/");
                 }
-                else if (elm.hasAttribute('class'))
-                    segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]')
-                else {
-                    for (i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling)
-                        if (sib.localName == elm.localName)
-                            i++
-                    segs.unshift(elm.localName.toLowerCase() + '[' + i + ']')
+                else if (elm.hasAttribute("class")){
+                    segs.unshift(elm.localName.toLowerCase() + "[@class=\"" + elm.getAttribute("class") + "\"]");
+                }else {
+                    for (var i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling){
+                        if (sib.localName === elm.localName){
+                            i++;
+                        }
+                    }
+                    segs.unshift(elm.localName.toLowerCase() + "[" + i + "]");
                 }
             }
-            return segs.length ? '/' + segs.join('/') : null
+            return segs.length ? "/" + segs.join("/") : null;
         },
         /**
          * Start recording events.
@@ -166,18 +175,19 @@
          */
 
         startRecording: function () {
-            var self = this, frame
-            $.each(['click', 'mousemove', 'change'], function (i, type) {
+            var self = this, frame;
+            $.each(["click", "mousemove", "change"], function (i, type) {
                 self.options.dom.bind(type, function (e) {
                     if (self.running) {
-                        if (!e.pageX)
-                            e.pageX = frame.x, e.pageY = frame.y
-                        frame = self.packFrame(e)
-                        self.frames.push(frame)
+                        if (!e.pageX){
+                            e.pageX = frame.x, e.pageY = frame.y;
+                        }
+                        frame = self.packFrame(e);
+                        self.frames.push(frame);
                     }
-                })
-            })
-            return this
+                });
+            });
+            return this;
         },
         /**
          * Stop recording and call finished
@@ -188,10 +198,11 @@
          */
 
         stop: function () {
-            this.running = false
-            if (this.options.finished instanceof Function)
-                this.options.finished.call(this)
-            return this
+            this.running = false;
+            if (this.options.finished instanceof Function){
+                this.options.finished.call(this);
+            }
+            return this;
         },
         /**
          * Start recording.
@@ -201,18 +212,19 @@
          */
 
         start: function () {
-            var self = this
+            var self = this;
             setTimeout(function () {
-                self.running = true
-                self.startRecording()
-                if (self.options.duration)
+                self.running = true;
+                self.startRecording();
+                if (self.options.duration){
                     setTimeout(function () {
-                        self.stop()
-                    }, self.options.duration)
-            }, this.options.delay)
-            return this
+                        self.stop();
+                    }, self.options.duration);
+                }
+            }, this.options.delay);
+            return this;
         }
-    }
+    };
 
     // --- EventPlayer
 
@@ -233,13 +245,13 @@
      */
 
     EventPlayer = function (session, options) {
-        this.session = session
+        this.session = session;
         this.options = $.extend({
-            dom: $('body'),
+            dom: $("body"),
             trigger: true,
             interval: 25
-        }, options || {})
-    }
+        }, options || {});
+    };
 
     EventPlayer.prototype = {
         /**
@@ -251,9 +263,9 @@
          */
 
         unpackFrame: function (frame) {
-            frame.xpath = frame.target
-            frame.target = $(this.getElementByXPath(frame.target))
-            return frame
+            frame.xpath = frame.target;
+            frame.target = $(this.getElementByXPath(frame.target));
+            return frame;
         },
         /**
          * Return an element by XPath of _path_.
@@ -264,8 +276,8 @@
          */
 
         getElementByXPath: function (path) {
-            result = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-            return result.singleNodeValue
+            result = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            return result.singleNodeValue;
         },
         /**
          * Play a single frame.
@@ -280,56 +292,57 @@
          */
 
         playFrame: function (frame) {
-            var self = this
-            isNewPath = this.lastPath != frame.xpath
+            var self = this;
+            isNewPath = this.lastPath !== frame.xpath;
 
             // Position
 
             this.cursor.css({
                 left: frame.x,
                 top: frame.y
-            })
+            });
 
             // Utilities
 
             trigger = function (type) {
-                self.trigger(type, frame.target)
-            }
+                self.trigger(type, frame.target);
+            };
 
             triggerLast = function (type) {
-                self.trigger(type, $(self.getElementByXPath(self.lastPath)))
-            }
+                self.trigger(type, $(self.getElementByXPath(self.lastPath)));
+            };
 
             // Event emulation
 
             switch (frame.type) {
-                case 'click':
-                    this.cursor.addClass('clicking')
-                    this.showDisc()
-                    trigger('click')
-                    break
+                case "click":
+                    this.cursor.addClass("clicking");
+                    this.showDisc();
+                    trigger("click");
+                    break;
 
-                case 'mousemove':
-                    trigger('mouseover')
-                    if (isNewPath)
-                        triggerLast('mouseout')
-                    break
+                case "mousemove":
+                    trigger("mouseover");
+                    if (isNewPath){
+                        triggerLast("mouseout");
+                    }
+                    break;
 
-                case 'change':
-                    trigger('change')
-                    frame.target.val(frame.value)
-                    break
+                case "change":
+                    trigger("change");
+                    frame.target.val(frame.value);
+                    break;
             }
 
             // GC
 
-            if (this.cursor.hasClass('clicking')) {
-                this.cursor.removeClass('clicking')
-                this.hideDisc()
+            if (this.cursor.hasClass("clicking")) {
+                this.cursor.removeClass("clicking");
+                this.hideDisc();
             }
 
-            this.lastPath = frame.xpath
-            return this
+            this.lastPath = frame.xpath;
+            return this;
         },
         /**
          * Trigger event _type_ for _target_.
@@ -345,9 +358,10 @@
          */
 
         trigger: function (type, target) {
-            if (this.options.trigger && target)
-                target.trigger(type)
-            return this
+            if (this.options.trigger && target){
+                target.trigger(type);
+            }
+            return this;
         },
         /**
          * Show the indication disc with optional
@@ -359,8 +373,8 @@
          */
 
         showDisc: function (color) {
-            this.disc.addClass(color || 'blue').fadeIn(80)
-            return this
+            this.disc.addClass(color || "blue").fadeIn(80);
+            return this;
         },
         /**
          * Hide the indication disc.
@@ -372,11 +386,11 @@
         hideDisc: function () {
             this.disc.fadeOut(80, function () {
                 $(this).
-                        removeClass('yellow').
-                        removeClass('blue').
-                        removeClass('red')
-            })
-            return this
+                        removeClass("yellow").
+                        removeClass("blue").
+                        removeClass("red");
+            });
+            return this;
         },
         /**
          * Step through the frames, playing each one
@@ -388,14 +402,15 @@
          */
 
         play: function () {
-            var self = this
+            var self = this;
             this.intervalID = setInterval(function () {
-                if (frame = self.session.frames.shift())
-                    self.playFrame(self.unpackFrame(frame))
-                else
-                    self.stop()
-            }, this.options.interval)
-            return this
+                if (frame = self.session.frames.shift()){
+                    self.playFrame(self.unpackFrame(frame));
+                }else{
+                    self.stop();
+                }
+            }, this.options.interval);
+            return this;
         },
         /**
          * Hide and remove the cursor.
@@ -405,10 +420,10 @@
          */
 
         removeCursor: function () {
-            $('#event-playback-cursor', this.dom).fadeOut('slow', function () {
-                $(this).remove()
-            })
-            return this
+            $("#event-playback-cursor", this.dom).fadeOut("slow", function () {
+                $(this).remove();
+            });
+            return this;
         },
         /**
          * Generate and display cursor element.
@@ -418,11 +433,11 @@
          */
 
         displayCursor: function () {
-            this.cursor = $('<div id="event-playback-cursor"><div class="disc"></div></div>')
-            this.disc = $('.disc', this.cursor)
-            this.options.dom.prepend(this.cursor)
-            this.cursor.fadeIn('slow');
-            return this
+            this.cursor = $("<div id=\"event-playback-cursor\"><div class=\"disc\"><\/div><\/div>");
+            this.disc = $(".disc", this.cursor);
+            this.options.dom.prepend(this.cursor);
+            this.cursor.fadeIn("slow");
+            return this;
         },
         /**
          * Stop playback.
@@ -435,12 +450,13 @@
          */
 
         stop: function () {
-            this.running = false
-            clearInterval(this.intervalID)
-            this.removeCursor()
-            if (this.options.finished instanceof Function)
-                this.options.finished.call(this)
-            return this
+            this.running = false;
+            clearInterval(this.intervalID);
+            this.removeCursor();
+            if (this.options.finished instanceof Function){
+                this.options.finished.call(this);
+            }
+            return this;
         },
         /**
          * Start playback.
@@ -450,15 +466,16 @@
          */
 
         start: function () {
-            var self = this
-            this.running = true
-            this.play().displayCursor()
-            if (this.options.duration)
+            var self = this;
+            this.running = true;
+            this.play().displayCursor();
+            if (this.options.duration){
                 setTimeout(function () {
-                    self.stop()
-                }, this.options.duration)
-            return this
+                    self.stop();
+                }, this.options.duration);
+            }
+            return this;
         }
-    }
+    };
 
-})(jQuery)
+})( jQuery, window, document );
