@@ -27,7 +27,7 @@ Record and play back events using jQuery.
 2. Include plugin's code:
 
 	```html
-	<script src="dist/jquery.boilerplate.min.js"></script>
+	<script src="dist/jquery.event-playback.min.js"></script>
 	```
 
 3. Call the plugin:
@@ -35,47 +35,49 @@ Below is a simple example which records events for 5 seconds, then automatically
 plays the session back when finished.
 
 	```javascript
-	
-  $.recordEvents({ duration: 5000 }, function(){
-    $.playbackEvents(this, { interval : 25 })
-  })
-```
-You may also load static sessions using jQuery's getJSON method:
-```javascript
-  $.getJSON('sessions/demo.json', function(session){
-    $.playbackEvents(session, { interval : 20 })
-  })
-```
-Saving a session might look similar to this:
-```javascript
-  $.recordEvents({ duration: 5000 }, function(){
-    session = this.export()
-    // Do a POST to server to save the session
-  }) 
+            $.recordEvents({ duration: 5000 }, function(){
+              $.playbackEvents(this, { interval : 25 })
+            })
+        ```
 
+        You may also load static sessions using jQuery's getJSON method:
+        
+        ```javascript
+          $.getJSON('sessions/demo.json', function(session){
+            $.playbackEvents(session, { interval : 20 })
+          })
+        ```
+
+        Saving a session might look similar to this:
+
+        ```javascript
+          $.recordEvents({ duration: 5000 }, function(){
+            session = this.export()
+            // Do a POST to server to save the session
+          }) 
 	```
 
 ## Structure
 
 The basic structure of the project is given in the following way:
 
-```
-├── demo/
-│   └── index.html
-├── dist/
-│   ├── jquery.boilerplate.js
-│   └── jquery.boilerplate.min.js
-├── src/
-│   ├── jquery.boilerplate.coffee
-│   └── jquery.boilerplate.js
-├── .editorconfig
-├── .gitignore
-├── .jshintrc
-├── .travis.yml
-├── boilerplate.jquery.json
-├── Gruntfile.js
-└── package.json
-```
+    ```
+    ├── demo/
+    │   └── index.html
+    ├── dist/
+    │   ├── jquery.boilerplate.js
+    │   └── jquery.boilerplate.min.js
+    ├── src/
+    │   ├── jquery.boilerplate.coffee
+    │   └── jquery.boilerplate.js
+    ├── .editorconfig
+    ├── .gitignore
+    ├── .jshintrc
+    ├── .travis.yml
+    ├── boilerplate.jquery.json
+    ├── Gruntfile.js
+    └── package.json
+    ```
 
 ## Contributing
 
