@@ -1,0 +1,35 @@
+{
+    "name": "jquery-event-playback",
+    "title": "jQuery Event Playback",
+    "description": "Record and play back events using jQuery",
+    "keywords": [
+        "jquery",
+        "event",
+        "playback"
+    ],
+    "version": "0.0.4",
+    "author": {
+        "name": "TJ Holowaychuk",
+        "email": "tj@vision-media.ca",
+        "url": "https://github.com/visionmedia"
+    },
+    "maintainers": [
+        {
+            "name": "Hüseyin Mert",
+            "email": "huseyinin@gmail.com",
+            "url": "https://github.com/hmert"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT"
+        }
+    ],
+    "bugs": "https://github.com/hmert/jquery-evert-playback/issues",
+    "homepage": "http://hmert.com/jquery-evert-playback",
+    "docs": "https://github.com/hmert/jquery-evert-playback#readme",
+    "download": "https://github.com/hmert/jquery-evert-playback/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.8"
+    }
+}

@@ -1,9 +1,10 @@
+# jQuery EventPlayback [![Build Status](https://secure.travis-ci.org/hmert/jquery-event-playback.svg?branch=master)](https://travis-ci.org/hmert/jquery-event-playback) ![Bower Version](https://badge.fury.io/bo/jquery-event-playback.svg)
 
-= EventPlayback
+### What is this
 
 Record and play back events using jQuery.
 
-== Features
+### Features
 
 * No external dependencies (jQuery only)
 * Record events
@@ -15,33 +16,76 @@ Record and play back events using jQuery.
   - hovering
   - input value changes
 
-== Examples
+## Usage
 
+1. Include jQuery:
+
+	```html
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	```
+
+2. Include plugin's code:
+
+	```html
+	<script src="dist/jquery.boilerplate.min.js"></script>
+	```
+
+3. Call the plugin:
 Below is a simple example which records events for 5 seconds, then automatically
 plays the session back when finished.
 
+	```javascript
+	
   $.recordEvents({ duration: 5000 }, function(){
     $.playbackEvents(this, { interval : 25 })
   })
-
+```
 You may also load static sessions using jQuery's getJSON method:
-
+```javascript
   $.getJSON('sessions/demo.json', function(session){
     $.playbackEvents(session, { interval : 20 })
   })
-
+```
 Saving a session might look similar to this:
-
+```javascript
   $.recordEvents({ duration: 5000 }, function(){
     session = this.export()
     // Do a POST to server to save the session
   }) 
 
-== Demo
+	```
 
-http://visionmedia.github.com/jquery-event-playback
+## Structure
 
-== License 
+The basic structure of the project is given in the following way:
+
+```
+├── demo/
+│   └── index.html
+├── dist/
+│   ├── jquery.boilerplate.js
+│   └── jquery.boilerplate.min.js
+├── src/
+│   ├── jquery.boilerplate.coffee
+│   └── jquery.boilerplate.js
+├── .editorconfig
+├── .gitignore
+├── .jshintrc
+├── .travis.yml
+├── boilerplate.jquery.json
+├── Gruntfile.js
+└── package.json
+```
+
+## Contributing
+
+Check [CONTRIBUTING](https://github.com/hmert/jquery-event-playback/blob/master/CONTRIBUTING.md) for more information.
+
+## History
+
+Check [releases](https://github.com/hmert/jquery-event-playback/releases) for detailed changelog.
+
+## License
 
 (The MIT License)
 

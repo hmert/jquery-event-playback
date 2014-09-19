@@ -1,0 +1,21 @@
+{
+    "name": "jquery-event-playback",
+    "version": "0.0.4",
+    "homepage": "http://hmert.com/jquery-event-playback",
+    "authors": [
+        "TJ Holowaychuk <tj@vision-media.ca>",
+        "Hüseyin Mert <huseyinin@gmail.com>"
+    ],
+    "description": "Record and play back events using jQuery.",
+    "main": "src/jquery.event-playback.js",
+    "dependencies": {
+        "jquery": "*"
+    },
+    "keywords": [
+        "jquery",
+        "plugin",
+        "event",
+        "playback"
+    ],
+    "license": "MIT"
+}

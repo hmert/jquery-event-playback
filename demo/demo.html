@@ -1,44 +1,44 @@
 <html>
-	<head>
-		<link type="text/css" rel="stylesheet" href="../lib/jquery.event-playback.css" />
-		<script src="jquery.js"></script>
-		<script src="../lib/jquery.event-playback.js"></script>
-		<script src="demo.js"></script>
-		<style>
-		  #examples {
-			  margin: 150px 0 0 150px;
-		  }
-		</style>
-	</head>
-	<body>
-		<div id="examples">
-			<input type="button" value="Button"/>
-			
-			<select>
-				<option value="">- Select -</option>
-				<option value="0">No</option>
-				<option value="1">Yes</option>
-			</select>
-			
-			<label><input type="checkbox" /> Awesome? </label>
-			<input type="radio" name="foo" />
-			<input type="radio" name="foo" />
-			
-			<input type="text" />
-			<p>
-				<label>Duration:</label>
-				<input type="text" value="5" id="seconds" />
-				<input type="button" value="Record" id="start" />
-				<input type="button" value="Replay" id="replay" />
-			</p>
-			<label>Session:</label>
-			<p>
-				<textarea id="export" rows="18" cols="120" style="font-size: 11px;"></textarea>
-			</p>
-			<label>Log:</label>
-			<p>
-				<textarea id="log" rows="5" cols="120" style="font-size: 11px;"></textarea>
-			</p>
-		</div>
-	</body>
+    <head>
+        <title>jQuery Event-Playback</title>
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="../src/jquery.event-playback.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <style type="text/css">
+            #examples {
+                margin: 150px 0 0 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="examples">
+            <input type="button" value="Button"/>
+
+            <select>
+                <option value="">- Select -</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label><input type="checkbox" /> Awesome? </label>
+            <input type="radio" name="foo" />
+            <input type="radio" name="foo" />
+
+            <input type="text" />
+            <p>
+                <label>Duration:</label>
+                <input type="text" value="5" id="seconds" />
+                <input type="button" value="Record" id="start" />
+                <input type="button" value="Replay" id="replay" />
+            </p>
+            <label>Session:</label>
+            <p>
+                <textarea id="export" rows="18" cols="120" style="font-size: 11px;"></textarea>
+            </p>
+            <label>Log:</label>
+            <p>
+                <textarea id="log" rows="5" cols="120" style="font-size: 11px;"></textarea>
+            </p>
+        </div>
+    </body>
 </html>
